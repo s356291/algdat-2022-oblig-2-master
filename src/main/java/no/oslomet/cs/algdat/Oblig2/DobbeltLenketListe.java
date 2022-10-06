@@ -49,7 +49,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         if (a.length > 0){
             int i = 0;
-            for (; i < a.length; i++){
+            for (; i < a.length; i++){      //sjekker om parametertabellen inneholder ikke null verdier og lager hode
                 if(a[i] != null){
                     hode = new Node<>(a[i]);
                     antall++;
@@ -58,7 +58,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             }
 
             hale = hode;
-            if(hode != null){
+            if(hode != null){           //Legger inn resten av parametabellen
                 i++;
                 for(; i < a.length; i++){
                     if (a[i] != null){
