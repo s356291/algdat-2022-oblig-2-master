@@ -39,7 +39,11 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     //finnNode metoden
     private Node<T> finnNode(int indeks){
-
+     Node<T> Nodes;
+     if(indeks<antall/2){
+         Nodes=hode;
+     }
+     return Nodes;
     }
 
     public DobbeltLenketListe() {
