@@ -90,8 +90,17 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public Liste<T> subliste(int fra, int til) {
+        fratilKontroll(antall, fra, til);
         throw new UnsupportedOperationException();
     }
+    private void fratilKontroll(int antall, int fra, int til){ //privat metode
+ if(fra<0 || til>antall) {
+     throw new IndexOutOfBoundsException();
+ }
+     if (fra>til){
+         throw new IllegalArgumentException();
+     }
+ }
 
     @Override
     public int antall() {
