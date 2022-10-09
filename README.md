@@ -23,4 +23,7 @@ Vi legger også inn at hvis det blir kun 1 verdi så vil det være samme node. O
 noder og sjekker om det ikke er null verdier. Etter at vi har kjørt koden så var det feil, da testet vi litt og så at
 public DobbeltLenketListe må være tom kontruktør. Etter det så gikk koden fint. 
 
-I oppgave 2 så brukte vi en ... til å ...
+I oppgave 2 så må vi lage toString metode. Det skal returnere tegnstreng med liste. Vi har valgt å bruke while løkke
+dette gjør det enklere enn for løkkene. Det skal også opprette en omvendtStreng for som er lik toString, men omvendt rekkefølge.
+Vi følger da koden fra toString og opppretter metoden på samme form. Etter det så oppretter vi metoden for leggInn metoden
+som skal stoppe på null verdier og kaste en feilmelding. Det skal også sjekke om listen er tom.

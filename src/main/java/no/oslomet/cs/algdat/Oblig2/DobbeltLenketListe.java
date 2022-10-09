@@ -109,12 +109,30 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean leggInn(T verdi) {
-        throw new UnsupportedOperationException();
+
+      Objects.requireNonNull(verdi, "Null verdier ikke tillatt");
+
+      Node p = new Node(verdi, null, null);
+
+      if(hode == null && hale == null){
+          p.forrige= null;
+          hode = p;
+          hale = p;
+          antall ++;
+          endringer++;
+      }else{
+          hale.neste = p;
+          p.forrige = hale;
+          hale = p;
+          antall++;
+          endringer++;
+      }
+      return true;
     }
 
     @Override
     public void leggInn(int indeks, T verdi) {
-        throw new UnsupportedOperationException();
+
     }
 
     @Override
@@ -179,7 +197,23 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public String omvendtString() {
-        throw new UnsupportedOperationException();
+        StringBuilder s = new StringBuilder();
+
+        if(!tom()){
+            s.append('[');
+            Node current = hale;
+            s.append(current.verdi);
+            current = current.forrige;
+            while (current != null){
+                s.append(',').append(' ').append(current.verdi);
+                current = current.forrige;
+            }
+            s.append("]");
+
+        }else{
+            s.append("[]");
+
+        }return s.toString();
     }
 
     @Override
