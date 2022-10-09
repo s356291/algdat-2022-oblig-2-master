@@ -27,3 +27,8 @@ I oppgave 2 så må vi lage toString metode. Det skal returnere tegnstreng med l
 dette gjør det enklere enn for løkkene. Det skal også opprette en omvendtStreng for som er lik toString, men omvendt rekkefølge.
 Vi følger da koden fra toString og opppretter metoden på samme form. Etter det så oppretter vi metoden for leggInn metoden
 som skal stoppe på null verdier og kaste en feilmelding. Det skal også sjekke om listen er tom.
+
+
+I Oppgave 4 så skal vi opprette metoden for indekstTil og finne posisjon og returnere -1 hvis det ikke finnes. 
+Det skal også kaste null verdi, her har vi brukt for løkker. Det er trengs å opprette boolean inneholder metoden
+og det returneres bare true eller false. 
