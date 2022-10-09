@@ -91,8 +91,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public Liste<T> subliste(int fra, int til) {
         fratilKontroll(antall, fra, til);
-        throw new UnsupportedOperationException();
+        Liste<T> liste = new DobbeltLenketListe<>();
+        Node<T> her = finnNode(fra);
+        for(int i = fra; i<til; i++){
+            liste.leggInn(her.verdi);
+            her = her.neste;
+        }
+        return liste;
     }
+
     private void fratilKontroll(int antall, int fra, int til){ //privat metode
  if(fra<0 || til>antall) {
      throw new IndexOutOfBoundsException();
