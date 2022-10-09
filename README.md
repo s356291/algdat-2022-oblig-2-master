@@ -9,8 +9,8 @@ Oppgaven er levert av følgende studenter:
 # Arbeidsfordeling
 
 I oppgaven har vi hatt følgende arbeidsfordeling:
-* Pete har hatt hovedansvar for oppgave 1, 2, og 3. 
-* Sander har hatt hovedansvar for oppgave 4, 5, og 6. 
+* Pete har hatt hovedansvar for oppgave 1, 2, og 4. 
+* Sander har hatt hovedansvar for oppgave 3, 5, og 6. 
 * Soban har hatt hovedansvar for oppgave 7, 8 og 9. 
 * Vi har i fellesskap løst oppgave 10. 
 
