@@ -200,15 +200,37 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean fjern(T verdi) {
-        if(verdi == null){
+        if(verdi == null)
             return false;
-        }
         Node<T> nodes = hode;
-        while(nodes != null){
-            if(nodes.verdi.equals(verdi)) break;
+        while(nodes != null) {
+            if (nodes.verdi.equals(verdi))
+                break;
             nodes = nodes.neste;
         }
-
+        if(nodes == null) {
+            return false;
+        }
+        else if(antall == 1) {
+            hode = hale = null;
+        }
+            else if(nodes == hode){
+                hode = hode.neste;
+                hode.forrige = null;
+        }
+            else if(nodes == hale){
+                hale = hale.forrige;
+                hale.neste = null;
+        }
+            else{
+                nodes.forrige.neste = nodes.neste;
+                nodes.neste.forrige = nodes.forrige;
+        }
+            nodes.verdi = null;
+            nodes.forrige = nodes.neste = null;
+            antall--;
+            endringer++;
+            return true;
     }
 
     @Override
