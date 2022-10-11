@@ -154,7 +154,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         else if(antall == 0){
         }
         else{
-        }
+         }
         antall++;
     }
 
