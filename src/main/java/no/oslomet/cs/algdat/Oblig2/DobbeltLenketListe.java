@@ -4,9 +4,7 @@ package no.oslomet.cs.algdat.Oblig2;
 ////////////////// class DobbeltLenketListe //////////////////////////////
 
 
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.Objects;
+import java.util.*;
 
 
 public class DobbeltLenketListe<T> implements Liste<T> {
@@ -196,7 +194,17 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void nullstill() {
-        throw new UnsupportedOperationException();
+
+        Node<T> node = hode;
+
+        while (node != null){
+            Node<T> neste = node.neste;
+            node.neste = null;
+            node.forrige = null;
+            node = neste;
+        }
+
+
     }
 
     @Override
@@ -238,7 +246,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         }return s.toString();
     }
-
     @Override
     public Iterator<T> iterator() {
         throw new UnsupportedOperationException();
@@ -270,14 +277,23 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         @Override
         public T next() {
-            throw new UnsupportedOperationException();
-        }
-
+            if(iteratorendringer != endringer)
+                throw new ConcurrentModificationException();
+            if(!hasNext())
+                throw new NoSuchElementException();
+            fjernOK = true;        }
         @Override
         public void remove() {
-            throw new UnsupportedOperationException();
-        }
+            if (!fjernOK)
+                throw new IllegalStateException("Denne tilstander går ikke");
 
+            if (iteratorendringer != endringer)
+                throw new ConcurrentModificationException("Det tilsvarer ikke");
+
+
+        antall--;
+
+}
     } // class DobbeltLenketListeIterator
 
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
