@@ -146,15 +146,21 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void leggInn(int indeks, T verdi) {
-        Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier!");
-        if(indeks == 0){
+        Objects.requireNonNull(verdi, "Ikke tillatt med nullverdier");
+        indeksKontroll(indeks,true);
+        if(antall == 0) {
+            hode = hale = new Node<>(verdi, null, null);
+        } else if(indeks == 0){
+            hode = hode.forrige = new Node<>(verdi, null, hode);
        }
         else if(indeks == antall){
-        }
-        else if(antall == 0){
+            hale = hale.neste = new Node<>(verdi, hale, null);
         }
         else{
+            Node<T> p = finnNode(indeks);
+            p.forrige = p.forrige.neste = new Node<>(verdi, p.forrige, p);
          }
+        endringer++;
         antall++;
     }
 
