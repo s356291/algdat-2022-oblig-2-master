@@ -32,3 +32,31 @@ som skal stoppe på null verdier og kaste en feilmelding. Det skal også sjekke 
 I Oppgave 4 så skal vi opprette metoden for indekstTil og finne posisjon og returnere -1 hvis det ikke finnes. 
 Det skal også kaste null verdi, her har vi brukt for løkker. Det er trengs å opprette boolean inneholder metoden
 og det returneres bare true eller false. 
+
+
+
+
+I oppgave 7 så skulle vi nullstillet listen. Her fant jeg en tidligere eksempel i kompendiet, som jeg brukte som utgangspunkt. Avsnitt 5.2.8 oppg 5. Her skrev jeg en while løkke (1.måte) mens (hode ikke = null). Inne i denne løkken sikret vi for at man starter i hode og vi nuller ut nodeverdien og pekerne for hver node.
+
+Etter løkken skal hode og hale settes til null, antall til 0 og endringer økes. 
+
+I oppgave 8 fulgte jeg bare hva oppgavene ba om
+8a) Dersom iteratorendringer ikke = endringer skal vi kaste en concurrentmodificationException.
+if (!hasNext()) bruker vi og kaster en Nosuchelementexception om det er ikke fler i listen 
+Så setter vi fjernOK til true, og returnerer verdien og flytter til neste Node 
+Ref kompendiet oppg 3.3.4 b)
+8b) Her legger vi bare til return statement til DobbeltLenketListeIterator
+8c) Her setter jeg pekeren til noden til den riktige indeksen.
+8d) Her følger vi hva oppgaven spør om og legger til en indeksKontroll, for å sjekke om metoden er lovlig, også legger til return statement.
+
+I oppgave 9 brukte jeg kompendiet 3.3, siden det var en lignede remove() oppgave der.
+
+Først skulle vi lage if(!fjernOK) og kaste en illegalstateexception der tilstanden ikke går.
+
+Etter det en if iteratorendringer ikke er lik endringer skal vi akste en concurrentmodificationexception, hvor det ikke tilsvarer
+
+fjernOK skal settes til false. 
+
+Så lager vi if setninger med steps 1, 2, 3, 4, (se kode for mer kommentarer)
+
+Antall reduserer, endringer økes, og iteratorendringer økes.
