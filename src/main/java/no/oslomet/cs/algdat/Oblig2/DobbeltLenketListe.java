@@ -230,6 +230,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             nodes.forrige = nodes.neste = null;
             antall--;
             endringer++;
+
             return true;
     }
 
