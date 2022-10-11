@@ -146,8 +146,18 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void leggInn(int indeks, T verdi) {
-
+        Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier!");
+        if(indeks == 0){
+       }
+        else if(indeks == antall){
+        }
+        else if(antall == 0){
+        }
+        else{
+        }
+        antall++;
     }
+
 
     @Override
     public boolean inneholder(T verdi) {
