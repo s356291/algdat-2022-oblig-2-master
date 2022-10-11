@@ -195,16 +195,16 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public void nullstill() {
 
-        Node<T> node = hode;
-
-        while (node != null){
-            Node<T> neste = node.neste;
-            node.neste = null;
-            node.forrige = null;
-            node = neste;
+        while (hode != null){ // Skriver while løkke så går ut på at, mens hode ikke er lik null
+            hode.neste = null; // Her skal vi starte i hode, som man ser
+            hode.forrige = null; // så nuller vi nodeverdien og pekere for hver node
+            hode = hode.neste; // Brukt kompendiet ref oppg. avsnitt 5.2.8 oppgave 5
         }
 
-
+        hode = null; // Hode og
+        hale = null; // hale settes til null
+        antall = 0; // antall til 0
+        endringer++; // endringer økes
     }
 
     @Override
@@ -246,13 +246,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         }return s.toString();
     }
+
     @Override
-    public Iterator<T> iterator() {
-        throw new UnsupportedOperationException();
+    public Iterator<T> iterator() { // 8b) Lager metoden iterator og returnerer instans av iteratorklassen (dobbelenket)
+       return new DobbeltLenketListeIterator();
     }
 
-    public Iterator<T> iterator(int indeks) {
-        throw new UnsupportedOperationException();
+    public Iterator<T> iterator(int indeks) { // 8d)
+        indeksKontroll(indeks, false);  // Sjekker om metoden er lovlig
+        return new DobbeltLenketListeIterator(indeks); // Returnere instans av iteratorklassen
     }
 
     private class DobbeltLenketListeIterator implements Iterator<T> {
@@ -267,7 +269,11 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
 
         private DobbeltLenketListeIterator(int indeks) {
-            throw new UnsupportedOperationException();
+            finnNode(indeks); // 8c) Setter pekeren til noden til riktige indeksen
+            denne = hode;
+            fjernOK = false;
+            iteratorendringer = endringer;
+
         }
 
         @Override
@@ -276,24 +282,54 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
 
         @Override
-        public T next() {
-            if(iteratorendringer != endringer)
-                throw new ConcurrentModificationException();
-            if(!hasNext())
-                throw new NoSuchElementException();
-            fjernOK = true;        }
+        public T next() { // 8a) metode t next()
+            if (iteratorendringer != endringer){ // Sjekker først om iteratorendringer er lik endringer hvis ikke concurrentmodificationException
+                throw new ConcurrentModificationException("Iteratorendringer er ikke lik endringer");}
+
+            if (!hasNext()) { // Kaster nosuchelemntExcepiton hvis det er ikke fler i listen
+                throw new NoSuchElementException("Det er ikke flere igjen i listen.");
+            }
+
+            fjernOK = true;  // Setter fjernOK til sann/true
+            T denneVerdi = denne.verdi;
+            denne = denne.neste;
+            return denneVerdi; // returnerer verdien og flytter til neste node
+            // ref kompendiet programkode 3.3.4 b)
+        }
         @Override
         public void remove() {
-            if (!fjernOK)
-                throw new IllegalStateException("Denne tilstander går ikke");
+            if (!fjernOK) {
+                throw new IllegalStateException("Denne tilstanden går ikke"); // Hvis det ikke er tilatt å kalle metoden skal vi kalle en illegalstateException
+            }
+            if (iteratorendringer != endringer) {
+                throw new ConcurrentModificationException("Det tilsvarer ikke"); // Hvis endringer og iteratorendringer er forskjeligge skal vi kaste en concurrentmodificationException
+            }
+            fjernOK = false; // Sette fjernOK til usann/false // Remove() kan ikke kalles på nytt
 
-            if (iteratorendringer != endringer)
-                throw new ConcurrentModificationException("Det tilsvarer ikke");
+            if (antall == 1  && denne == null){ // 1. Dersom antall == 1 så skal vi nulle hode og hale
+                hode = null;
+                hale = null;
+            }
+            else if (denne == null) { // 2. For å fjerne den siste må vi sette denne == null og
+                hale = hale.forrige; // Hale oppdateres
+                hale.neste = null;
+            }
+            else if (denne.forrige == hode) { // 3. For å fjerne hode (denne.forrige==hode)
+            hode = denne; // Hode oppdateres
+            hode.forrige = null;
+            }
+            else{
+                Node<T> df = denne.forrige; // 4. For å fjerne en node fra listen må vi oppdatere pekere på begge sider // Hjelpevariabel
+                df.forrige.neste = denne;
+                denne.forrige = df.forrige;
+            }
 
+            antall--; // Antall reduseres
+            endringer++; // Endringer økes
+            iteratorendringer++; // Iteratorendringer økes
+            // Brukt kompendiet ref Delkapittel 3.3
 
-        antall--;
-
-}
+        }
     } // class DobbeltLenketListeIterator
 
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
