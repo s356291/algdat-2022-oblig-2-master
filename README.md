@@ -63,3 +63,5 @@ fjernOK skal settes til false.
 Så lager vi if setninger med steps 1, 2, 3, 4, (se kode for mer kommentarer)
 
 Antall reduserer, endringer økes, og iteratorendringer økes.
+
+I oppgave 10, så skulle vi sortere en liste ved hjelp av en komparator c. Vi kunne bare bruke metodene Liste, og det brukte vi ved å først lage to for løkker en for j og en for i hvor vi går gjennom hele liste.antall().  Deretter lager vi en if og comparer vi liste.hent j med liste hent i og setter if statement til de to mindre enn 0. Det betyr at hvis liste.hent(j) < liste.hent(i) så vil resten av koden gå gjennom hvor vi oppdaterer listen. 
