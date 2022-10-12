@@ -195,6 +195,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         Node<T> p = finnNode(indeks);
         T gVerdi = p.verdi;
         p.verdi = nyverdi;
+        endringer++;
         return gVerdi;
     }
 
@@ -326,7 +327,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public Iterator<T> iterator() { // 8b) Lager metoden iterator og returnerer instans av iteratorklassen (dobbelenket)
-       return new DobbeltLenketListeIterator();
+
+        return new DobbeltLenketListeIterator();
     }
 
     public Iterator<T> iterator(int indeks) { // 8d)
@@ -347,7 +349,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         private DobbeltLenketListeIterator(int indeks) {
             finnNode(indeks); // 8c) Setter pekeren til noden til riktige indeksen
-            denne = hode;
             fjernOK = false;
             iteratorendringer = endringer;
 
@@ -360,19 +361,20 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         @Override
         public T next() { // 8a) metode t next()
-            if (iteratorendringer != endringer){ // Sjekker først om iteratorendringer er lik endringer hvis ikke concurrentmodificationException
+            if (iteratorendringer != endringer) { // Sjekker først om iteratorendringer er lik endringer hvis ikke concurrentmodificationException
                 throw new ConcurrentModificationException("Iteratorendringer er ikke lik endringer");}
 
-            if (!hasNext()) { // Kaster nosuchelemntExcepiton hvis det er ikke fler i listen
-                throw new NoSuchElementException("Det er ikke flere igjen i listen.");
+                if (!hasNext()) { // Kaster nosuchelemntExcepiton hvis det er ikke fler i listen
+                    throw new NoSuchElementException("Det er ikke flere igjen i listen.");}
+
+
+                fjernOK = true;  // Setter fjernOK til sann/true
+                T denneVerdi = denne.verdi;
+                denne = denne.neste;
+                return denneVerdi; // returnerer verdien og flytter til neste node
+                // ref kompendiet programkode 3.3.4 b)
             }
 
-            fjernOK = true;  // Setter fjernOK til sann/true
-            T denneVerdi = denne.verdi;
-            denne = denne.neste;
-            return denneVerdi; // returnerer verdien og flytter til neste node
-            // ref kompendiet programkode 3.3.4 b)
-        }
         @Override
         public void remove() {
             if (!fjernOK) {
