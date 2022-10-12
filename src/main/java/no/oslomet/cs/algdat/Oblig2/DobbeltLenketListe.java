@@ -414,12 +414,16 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
         T sort;
         for(int j = 0; j < liste.antall(); j++){
+
             for(int i=0; i<liste.antall(); i++){
+
                 if((c.compare(liste.hent(j),liste.hent(i)))<0) // sammenlikner gjennom c, hvis liste.hent(j) == liste.hent(i) returnerer den verdien 0, hxis j>i = 1, j<i = -1
                 {
                     sort = liste.hent(j);
                     liste.oppdater(j,liste.hent(i));
+
                     liste.oppdater(i,sort);
+
                 }
 
             }
